@@ -500,7 +500,7 @@
       position: fixed;
       right: 24px;
       bottom: 24px;
-      padding: 22px;
+      padding: 12px;
       border-radius: 999px;
       background: var(--accent);
       color: var(--brand);
@@ -512,24 +512,24 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      width: 124px;
-      height: 124px;
+      width: 80px;
+      height: 80px;
       text-align: center;
     }
 
     .floating-buy img {
-      width: 54px;
+      width: 32px;
       height: auto;
       display: block;
     }
 
     .floating-buy .floating-label {
-      font-size: 0.8rem;
+      font-size: 0.55rem;
       font-weight: 600;
       letter-spacing: 0.04em;
-      color: var(--brand);
+      color: #fff;
       line-height: 1.2;
       white-space: nowrap;
     }
@@ -550,25 +550,6 @@
       transform: translateY(-3px);
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
       background: #ffcb1f;
-    }
-
-    @media (max-width: 640px) {
-      .floating-buy {
-        right: 16px;
-        bottom: 24px;
-        width: 96px;
-        height: 96px;
-        padding: 18px;
-        gap: 6px;
-      }
-
-      .floating-buy img {
-        width: 42px;
-      }
-
-      .floating-buy .floating-label {
-        font-size: 0.7rem;
-      }
     }
 
     .color-strip {
