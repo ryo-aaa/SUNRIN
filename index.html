@@ -90,6 +90,13 @@
       min-height: 52px;
     }
 
+    .campaign-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
     .campaign-label {
       font-size: clamp(0.75rem, 2vw, 0.9rem);
       letter-spacing: 0.08em;
@@ -147,6 +154,25 @@
       text-align: center;
       font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
       font-weight: 700;
+    }
+
+    @media (max-width: 640px) {
+      .campaign-inner {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-align: center;
+      }
+
+      .campaign-row {
+        gap: 4px;
+      }
+
+      .campaign-cta {
+        width: 100%;
+        max-width: 240px;
+      }
     }
 
     header {
@@ -1264,8 +1290,10 @@
   <a class="skip-link" href="#main">本文へ移動</a>
   <div class="campaign-banner" role="status" aria-live="polite">
     <div class="campaign-inner">
-      <span class="campaign-label">キャンペーン終了まで残り</span>
-      <span class="campaign-timer" id="campaign-countdown">14日 00:00:00</span>
+      <div class="campaign-row">
+        <span class="campaign-label">キャンペーン終了まで残り</span>
+        <span class="campaign-timer" id="campaign-countdown">14日 00:00:00</span>
+      </div>
       <a class="campaign-cta" href="https://sun-emperor.jp/news/aw-campaign2025" target="_blank" rel="noopener">特典はこちら</a>
     </div>
     <span class="campaign-period">期間 2025/11/05〜11/19まで</span>
@@ -1326,14 +1354,14 @@
         </a>
         <a class="color-card-link" href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">
           <figure class="color-card" role="listitem" data-color="black">
-            <img class="color-thumb" src="ブラック.png" alt="SUNRIN BLACK カラーの車体" loading="lazy">
+            <img class="color-thumb" src="ブラック.png" alt="SUNRIN BLACK カラーの車体" loading="lazy">
             <figcaption>BLACK</figcaption>
             <span class="color-label">Black</span>
           </figure>
         </a>
         <a class="color-card-link" href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">
           <figure class="color-card" role="listitem" data-color="blue">
-            <img class="color-thumb" src="ブルー.png" alt="SUNRIN BLUE カラーの車体" loading="lazy">
+            <img class="color-thumb" src="ブルー.png" alt="SUNRIN BLUE カラーの車体" loading="lazy">
             <figcaption>BLUE</figcaption>
             <span class="color-label">Blue</span>
           </figure>
