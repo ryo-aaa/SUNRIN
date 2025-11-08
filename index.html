@@ -16,6 +16,8 @@
       --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       --container: 1200px;
       --banner-offset: 0px;
+      --cta-green: #0f9d58;
+      --cta-green-dark: #0c7c45;
     }
 
     *, *::before, *::after {
@@ -498,12 +500,12 @@
 
     .floating-buy {
       position: fixed;
-      right: 24px;
+      right: 16px;
       bottom: 24px;
-      padding: 12px;
-      border-radius: 999px;
-      background: var(--accent);
-      color: var(--brand);
+      padding: 18px;
+      border-radius: 50%;
+      background: var(--cta-green);
+      color: #fff;
       font-weight: 700;
       letter-spacing: 0.02em;
       box-shadow: var(--shadow);
@@ -514,24 +516,24 @@
       justify-content: center;
       gap: 6px;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      width: 80px;
-      height: 80px;
+      width: 96px;
+      height: 96px;
       text-align: center;
     }
 
     .floating-buy img {
-      width: 32px;
+      width: 42px;
       height: auto;
       display: block;
     }
 
     .floating-buy .floating-label {
-      font-size: 0.55rem;
+      font-size: 0.7rem;
       font-weight: 600;
       letter-spacing: 0.04em;
       color: #fff;
-      line-height: 1.2;
-      white-space: nowrap;
+      line-height: 1.3;
+      white-space: normal;
     }
 
     .floating-buy .sr-only {
@@ -546,10 +548,54 @@
       border: 0;
     }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .floating-buy:hover {
       transform: translateY(-3px);
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
-      background: #ffcb1f;
+      background: var(--cta-green-dark);
+    }
+
+    .floating-buy.is-raised {
+      bottom: 140px;
+    }
+
+    @media (min-width: 768px) {
+      .floating-buy {
+        right: 32px;
+        bottom: 32px;
+        width: auto;
+        height: auto;
+        padding: 14px 28px;
+        border-radius: 999px;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .floating-buy img {
+        width: 40px;
+      }
+
+      .floating-buy .floating-label {
+        font-size: 0.9rem;
+        white-space: nowrap;
+        line-height: 1.2;
+      }
+
+      .floating-buy.is-raised {
+        bottom: 180px;
+      }
     }
 
     .color-strip {
@@ -567,6 +613,23 @@
       margin: 0;
       padding: 32px 20px;
       position: relative;
+    }
+
+    .color-card-link {
+      flex: 1 1 360px;
+      max-width: 420px;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    .color-card-link:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .color-card-link:focus-visible .color-card {
+      opacity: 1;
+      z-index: 2;
     }
 
     .color-gallery::before {
@@ -592,8 +655,6 @@
     }
 
     .color-card {
-      flex: 1 1 240px;
-      max-width: 320px;
       border-radius: var(--radius);
       padding: 12px;
       background: transparent;
@@ -604,9 +665,27 @@
       overflow: visible;
       z-index: 0;
       transition: opacity 0.35s ease;
+      width: 100%;
+      height: 100%;
     }
 
     @media (max-width: 640px) {
+      .color-gallery {
+        justify-content: center;
+      }
+
+      .color-card-link {
+        flex: 0 1 auto;
+        width: min(400px, 96%);
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .color-card {
+        width: 100%;
+      }
+
       .color-gallery::before {
         width: 80%;
         height: 38%;
@@ -618,23 +697,13 @@
     }
 
     .color-gallery .color-card:hover,
-    .color-gallery .color-card:focus-visible {
+    .color-card-link:focus-visible .color-card {
       opacity: 1;
       z-index: 2;
     }
 
     .color-gallery:focus-within .color-card {
       opacity: 0.8;
-    }
-
-    .color-gallery:focus-within .color-card:focus-visible {
-      opacity: 1;
-      z-index: 2;
-    }
-
-    .color-card:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 4px;
     }
 
     .color-thumb {
@@ -647,24 +716,50 @@
     }
 
     .color-card:hover .color-thumb,
-    .color-card:focus-visible .color-thumb {
+    .color-card-link:focus-visible .color-thumb {
       transform: scale(1.08);
     }
 
     .color-card figcaption {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-      font-weight: 900;
-      font-size: clamp(3rem, 8vw, 6rem);
-      letter-spacing: 0.12em;
+      display: none;
+    }
+
+    .color-label {
+      margin-top: 12px;
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(17, 17, 17, 0.22);
-      pointer-events: none;
-      white-space: nowrap;
-      z-index: 0;
+      color: var(--brand);
+    }
+
+    .mobile-gallery {
+      display: none;
+    }
+
+    .mobile-gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .fade-target {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    .fade-target.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-gallery {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+      }
     }
 
     .scroll-indicator {
@@ -683,6 +778,34 @@
       height: 1px;
       background: var(--muted);
     }
+
+    .site-links {
+      margin: 0 calc(50% - 50vw);
+      width: 100vw;
+      background: #000;
+      color: #fff;
+      padding: 36px 20px 48px;
+    }
+
+    .site-links-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .site-links-list {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+    }
+
+    .site-links-list a {
+      color: inherit;
+    }
+
 
     .cards-grid {
       display: grid;
@@ -950,40 +1073,36 @@
       margin-top: 16px;
     }
 
-    .review-card {
+    #review {
+      text-align: center;
+    }
+
+    .dealer-support {
       display: grid;
-      gap: 16px;
-      padding: 24px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      background: #fff;
+      gap: 12px;
+      justify-items: center;
     }
 
-    .review-subtitle {
-      display: block;
-      font-size: clamp(0.9rem, 2.8vw, 1.05rem);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-      margin-top: 4px;
-      text-align: center;
+    .dealer-support h2 {
+      margin: 0;
+      font-size: clamp(1.4rem, 4vw, 1.8rem);
     }
 
-    #review h2 {
-      text-align: center;
-      margin-bottom: 16px;
-      line-height: 1.2;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: var(--accent);
+    .dealer-support p {
+      margin: 0;
       color: var(--brand);
       font-weight: 600;
-      font-size: 0.9rem;
+    }
+
+    .dealer-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .dealer-buttons .btn {
+      min-width: 200px;
     }
 
     .faq-item {
@@ -1146,11 +1265,10 @@
   <div class="campaign-banner" role="status" aria-live="polite">
     <div class="campaign-inner">
       <span class="campaign-label">キャンペーン終了まで残り</span>
-      <span class="campaign-timer" id="campaign-countdown">24:00:00</span>
-      <a class="campaign-cta" href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">今すぐ予約</a>
+      <span class="campaign-timer" id="campaign-countdown">14日 00:00:00</span>
+      <a class="campaign-cta" href="https://sun-emperor.jp/news/aw-campaign2025" target="_blank" rel="noopener">特典はこちら</a>
     </div>
-    <span class="campaign-period">期間 2025/10/20〜10/25まで</span>
-    <span class="campaign-subtext">最大10%OFFキャンペーン実施中</span>
+    <span class="campaign-period">期間 2025/11/05〜11/19まで</span>
   </div>
   <header>
     <div class="nav-container">
@@ -1175,7 +1293,7 @@
 
   <div class="cta-bar" role="region" aria-label="固定予約バナー">
     <span>SUNRINを体験する準備はできていますか？</span>
-    <a href="https://sun-emperor.stores.jp/" target="_blank" rel="noopener">予約する</a>
+    <a href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">予約する</a>
   </div>
 
   <main id="main">
@@ -1199,18 +1317,27 @@
     <section class="color-strip" aria-label="SUNRINのカラーバリエーション">
       <h3 class="color-lineup-title">COLOR LINEUP</h3>
       <div class="color-gallery" role="list">
-        <figure class="color-card" role="listitem" tabindex="0" data-color="white">
-          <img class="color-thumb" src="ホワイト.png" alt="SUNRIN WHITE カラーの車体" loading="lazy">
-          <figcaption>WHITE</figcaption>
-        </figure>
-        <figure class="color-card" role="listitem" tabindex="0" data-color="black">
-          <img class="color-thumb" src="ブラック.png" alt="SUNRIN BLACK カラーの車体" loading="lazy">
-          <figcaption>BLACK</figcaption>
-        </figure>
-        <figure class="color-card" role="listitem" tabindex="0" data-color="blue">
-          <img class="color-thumb" src="ブルー.png" alt="SUNRIN BLUE カラーの車体" loading="lazy">
-          <figcaption>BLUE</figcaption>
-        </figure>
+        <a class="color-card-link" href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">
+          <figure class="color-card" role="listitem" data-color="white">
+            <img class="color-thumb" src="ホワイト.png" alt="SUNRIN WHITE カラーの車体" loading="lazy">
+            <figcaption>WHITE</figcaption>
+            <span class="color-label">White</span>
+          </figure>
+        </a>
+        <a class="color-card-link" href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">
+          <figure class="color-card" role="listitem" data-color="black">
+            <img class="color-thumb" src="ブラック.png" alt="SUNRIN BLACK カラーの車体" loading="lazy">
+            <figcaption>BLACK</figcaption>
+            <span class="color-label">Black</span>
+          </figure>
+        </a>
+        <a class="color-card-link" href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">
+          <figure class="color-card" role="listitem" data-color="blue">
+            <img class="color-thumb" src="ブルー.png" alt="SUNRIN BLUE カラーの車体" loading="lazy">
+            <figcaption>BLUE</figcaption>
+            <span class="color-label">Blue</span>
+          </figure>
+        </a>
       </div>
     </section>
 
@@ -1308,9 +1435,9 @@
     </section>
 
     <section id="promo-video" class="reveal" aria-label="製品紹介動画">
-      <h2>バイク系YouTuber"Dチャリ調査隊"様の試乗レビュー</h2>
+      <h2>バイク系YouTuber「Dチャリ調査隊」様<br>試乗レビュー</h2>
       <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/i-8DPzNSGxk?si=RN8t2XWYYSEX0nXP" title="SUNRIN プロモーション動画" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/i-8DPzNSGxk?rel=0" title="SUNRIN プロモーション動画" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </section>
 
@@ -1360,6 +1487,11 @@
         </div>
       </div>
     </section>
+
+    <div class="mobile-gallery" aria-label="SUNRINのスマートフォン向けギャラリー">
+      <img class="fade-target" src="2.jpeg" alt="SUNRINの屋外走行シーン">
+      <img src="4.jpeg" alt="SUNRINのディテールカット">
+    </div>
 
     <!-- COMPONENT: SPECS -->
     <section id="specs" class="reveal" aria-labelledby="specs-heading">
@@ -1419,11 +1551,15 @@
       <p class="footnote" id="spec-footnote">*¹ 充電時間は残容量で変動。*² 気象・路面等の条件で変動。</p>
     </section>
 
-    <!-- COMPONENT: REVIEW -->
-    <section id="review" class="reveal">
-      <span class="badge">試乗レビュー</span>
-      <div class="review-card">
-        <img src="https://picsum.photos/900/400?random=6" alt="Dチャリ調査隊の試乗レビューのイメージ" loading="lazy">
+    <!-- COMPONENT: DEALER SUPPORT -->
+    <section id="review" class="reveal" aria-labelledby="dealer-support-heading">
+      <div class="dealer-support">
+        <h2 id="dealer-support-heading">在庫状況・試乗のご案内</h2>
+        <p>在庫状況・試乗に関しては各販売店へお問い合わせください。</p>
+        <div class="dealer-buttons">
+          <a class="btn btn-secondary" href="https://sun-emperor.jp/store-search/" target="_blank" rel="noopener">代理店一覧</a>
+          <a class="btn btn-secondary" href="https://sun-emperor.jp/buy-contact/" target="_blank" rel="noopener">お問い合わせはこちら</a>
+        </div>
       </div>
     </section>
 
@@ -1516,11 +1652,11 @@
           <li>その他道路交通法に違反する行為もしないようお願い申し上げます。</li>
         </ul>
       </div>
-    </section>
+  </section>
 
-    <!-- COMPONENT: CTA -->
-    <section id="cta" class="reveal" aria-labelledby="cta-heading">
-      <h2 id="cta-heading">SUNRINのある生活をはじめよう</h2>
+  <!-- COMPONENT: CTA -->
+  <section id="cta" class="reveal" aria-labelledby="cta-heading">
+    <h2 id="cta-heading">SUNRINのある生活をはじめよう</h2>
       <div class="double-cta">
         <div class="cta-row">
           <a class="btn btn-primary" href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">予約はこちら</a>
@@ -1536,9 +1672,16 @@
   </div>
   </main>
 
-  <footer>
-    営業時間 10:00–19:00／定休日：土・日
-  </footer>
+  <section class="site-links" aria-label="フッターリンク">
+    <div class="site-links-inner">
+      <div class="site-links-list">
+        <a href="https://sun-emperor.jp/%e7%89%b9%e5%ae%9a%e5%95%86%e5%8f%96%e5%bc%95%e6%b3%95%e3%81%ab%e5%9f%ba%e3%81%9a%e3%81%8f%e8%a1%a8%e7%a4%ba/" target="_blank" rel="noopener">特定商取引法に基づく表示</a>
+        <a href="https://sun-emperor.jp/company/" target="_blank" rel="noopener">運営会社</a>
+        <a href="https://sun-emperor.jp/%e3%83%97%e3%83%a9%e3%82%a4%e3%83%90%e3%82%b7%e3%83%bc%e3%83%9d%e3%83%aa%e3%82%b7%e3%83%bc/" target="_blank" rel="noopener">プライバシー</a>
+        <a href="https://sun-emperor.jp/buy-contact/" target="_blank" rel="noopener">お問い合わせ</a>
+      </div>
+    </div>
+  </section>
 
   <a class="floating-buy" href="https://sun-emperor.stores.jp/items/6780d48ac5d1bb015803751c" target="_blank" rel="noopener">
     <span class="sr-only">SUNRINを予約する</span>
@@ -1563,31 +1706,38 @@
     }
 
     if (countdownDisplay) {
-      let remainingSeconds = 24 * 60 * 60;
+      const campaignStart = new Date('2025-11-05T00:00:00+09:00');
+      const campaignEnd = new Date('2025-11-19T23:59:59+09:00');
 
-      const formatTime = (totalSeconds) => {
-        const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-        const seconds = String(totalSeconds % 60).padStart(2, '0');
-        return `${hours}:${minutes}:${seconds}`;
+      const getRemainingSeconds = () => {
+        const now = new Date();
+        if (now < campaignStart) {
+          return Math.floor((campaignEnd - campaignStart) / 1000);
+        }
+        return Math.max(0, Math.floor((campaignEnd - now) / 1000));
       };
 
+      const formatTime = (totalSeconds) => {
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = String(Math.floor((totalSeconds % 86400) / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+        return days > 0 ? `${days}日 ${hours}:${minutes}:${seconds}` : `${hours}:${minutes}:${seconds}`;
+      };
+
+      let countdownInterval = null;
+
       const renderCountdown = () => {
+        const remainingSeconds = getRemainingSeconds();
         countdownDisplay.textContent = formatTime(remainingSeconds);
+        if (remainingSeconds <= 0 && countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+        }
       };
 
       renderCountdown();
-
-      const countdownInterval = setInterval(() => {
-        if (remainingSeconds <= 0) {
-          remainingSeconds = 0;
-          renderCountdown();
-          clearInterval(countdownInterval);
-          return;
-        }
-        remainingSeconds -= 1;
-        renderCountdown();
-      }, 1000);
+      countdownInterval = setInterval(renderCountdown, 1000);
     }
 
     const menuToggle = document.querySelector('.menu-toggle');
@@ -1703,6 +1853,38 @@
     revealElements.forEach((el) => {
       revealObserver.observe(el);
     });
+
+    const fadeTargets = document.querySelectorAll('.fade-target');
+    if (fadeTargets.length && 'IntersectionObserver' in window) {
+      const fadeObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      fadeTargets.forEach((target) => fadeObserver.observe(target));
+    }
+
+    const floatingBuy = document.querySelector('.floating-buy');
+    const siteLinks = document.querySelector('.site-links');
+    if (floatingBuy && siteLinks && 'IntersectionObserver' in window) {
+      const floaterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            floatingBuy.classList.add('is-raised');
+          } else {
+            floatingBuy.classList.remove('is-raised');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      floaterObserver.observe(siteLinks);
+    }
   </script>
 </body>
 </html>
